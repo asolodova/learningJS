@@ -23,7 +23,6 @@ function loadEventListeners() {
 
 }
 
-
 // Functions
 function buyCourse(e) {
     e.preventDefault();
@@ -96,9 +95,28 @@ function getCoursesFromStorage() {
 }
 // remove course
 function removeCourse(e) {
+    let course, courseID;
+    // Remove from the dom
     if(e.target.classList.contains('remove')){
         e.target.parentElement.parentElement.remove();
+        course = e.target.parentElement.parentElement;
+        courseID = course.querySelector('a').getAttribute('data-id');
     }
+    console.log(courseID);
+    // remove from storage
+    removeCourseLocalStorage(courseID);
+
+}
+function removeCourseLocalStorage(id) {
+    let coursesLS = getCoursesFromStorage();
+
+    // Loop
+    coursesLS.forEach(function (courseLS, index) {
+        if (courseLS.id === id){
+            coursesLS.splice(index, 1);
+        }
+    });
+    localStorage.setItem('courses', JSON.stringify(coursesLS));
 }
 
 function clearCart() {
@@ -106,7 +124,15 @@ function clearCart() {
     while (shoppingCartContent.firstChild){
         shoppingCartContent.removeChild(shoppingCartContent.firstChild);
     }
+
+    // Clear from local  storage
+    clearLocalStorage();
 }
+function clearLocalStorage() {
+    localStorage.clear();
+
+}
+
 function getFromLocalStorage() {
     let coursesLS = getCoursesFromStorage();
 
