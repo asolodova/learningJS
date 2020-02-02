@@ -41,6 +41,9 @@ function newTweet(e){
     // Add tweet to localStorage
     addTweetLocalStorage(tweet);
 
+    // Print the alert
+    alert('Tweet added');
+    this.reset();
 }
 
 // Remove the tweets from the DOM
@@ -48,6 +51,8 @@ function removeTweet(e){
     if(e.target.classList.contains('remove-tweet')){
         e.target.parentElement.remove();
     }
+    // Remove from Storage
+    removeTweetLocalStorage(e.target.parentElement.textContent);
 }
 
 // Adds tweets to localStorage
@@ -73,12 +78,11 @@ function getTweetsFromStorage() {
 
 function localStorageOnLoad() {
     let tweets = getTweetsFromStorage();
-    console.log(tweets);
     tweets.forEach(function (tweet) {
 
         const removeBtn = document.createElement('a');
         removeBtn.classList = 'remove-tweet';
-        removeBtn.textContent = ' X';
+        removeBtn.textContent = 'X';
 
         // Create an <li> element
         const li = document.createElement('li');
@@ -91,4 +95,24 @@ function localStorageOnLoad() {
         // Add to the list
         tweetList.appendChild(li);
     })
+}
+
+// Removes the tweet from localStorage
+
+function removeTweetLocalStorage(tweet) {
+    let tweets = getTweetsFromStorage();
+    // Remove the X from the tweet
+    const tweetDelete = tweet.substring(0, tweet.length - 1);
+    console.log(tweetDelete);
+
+    // Loop
+    tweets.forEach(function (tweetLS, index) {
+        if(tweetDelete === tweetLS){
+            tweets.splice(index, 1)
+            }
+    });
+    // Save the data
+    localStorage.setItem('tweets', JSON.stringify(tweets));
+    alert('Tweet deleted');
+
 }
