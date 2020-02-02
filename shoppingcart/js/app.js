@@ -13,7 +13,7 @@ function loadEventListeners() {
     courses.addEventListener('click', buyCourse);
 
     // when the remove button is clicked
-    shoppingCartContent.addEventListener('click', removeCourse)
+    shoppingCartContent.addEventListener('click', removeCourse);
 
     // when the clear cart
     clearCartBtn.addEventListener('click', clearCart);
@@ -40,7 +40,7 @@ function getCourseInfo(course) {
         title: course.querySelector('h4').textContent,
         price: course.querySelector('.price span').textContent,
         id: course.querySelector('a').getAttribute('data-id')
-    }
+    };
     console.log(courseInfo.image);
     // Insert info the shopping cart
     addIntoCart(courseInfo);
@@ -53,7 +53,7 @@ function addIntoCart(course) {
     row.innerHTML = `
         <tr>
             <td>
-                <img src="${course.imag}">
+                <img src="${course.imag}" alt="1">
             </td>
             <td>${course.title}</td>
             <td>${course.price}</td>
@@ -64,6 +64,32 @@ function addIntoCart(course) {
     `;
 
     shoppingCartContent.appendChild(row);
+
+    // Add course info Storage
+    saveInfoStorage(course);
+
+}
+
+// Add courses into the local storage
+function saveInfoStorage(course) {
+    let courses = getCoursesFromStorage();
+
+    // add the course into array
+    courses.push(course);
+    localStorage.setItem('courses', JSON.stringify(courses));
+
+}
+// Get courses into the local storage
+function getCoursesFromStorage() {
+
+    let courses;
+    // if something exist on storage then we get the value, otherwise create an empty array
+    if(localStorage.getItem('courses') === null){
+        courses = [];
+    } else {
+        courses = JSON.parse(localStorage.getItem('courses'));
+    }
+    return courses;
 }
 // remove course
 function removeCourse(e) {
