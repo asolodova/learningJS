@@ -9,21 +9,41 @@ const sendBtn = document.getElementById('sendBtn'),
 eventListeners();
 
 function eventListeners() {
-
     // App Init
     document.addEventListener('DOMContentLoaded', appInit);
-
     // validate form
     email.addEventListener('blur', validateField);
     subject.addEventListener('blur', validateField);
     message.addEventListener('blur', validateField);
     //
     resetBtn.addEventListener('click', resetForm);
+    sendEmailform.addEventListener('submit', sendEmail);
 }
 
+function sendEmail(e) {
+    e.preventDefault();
 
+    // show the spinner
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'block';
+    // show image
+    const sendEmailImg = document.createElement('img');
+    sendEmailImg.src = 'img/mail.gif';
+    sendEmailImg.style.display = 'block';
 
-//
+    // hide spinner then show the send Email image
+    setTimeout(function (){
+        // hide the spinner
+        spinner.style.display = 'none';
+        document.querySelector('#loaders').appendChild(sendEmailImg);
+        // hide the img after 5 second
+        setTimeout(function () {
+            sendEmailImg.reset();
+            sendEmailImg.remove();
+        }, 5000);
+    }, 3000);
+}
+
 function appInit() {
     sendBtn.disabled = true;
 }
@@ -37,7 +57,6 @@ function validateField() {
     if(this.type === 'email'){
         validateEmail(this);
     }
-
     // Both errors
     error = document.querySelectorAll('.error');
 
