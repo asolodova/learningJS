@@ -26,7 +26,7 @@ function newTweet(e){
     removeBtn.textContent = ' X';
 
     // Create an <li> element
-    const li = document.createElement('li')
+    const li = document.createElement('li');
     li.textContent = tweet;
     tweetList.appendChild(li);
 
