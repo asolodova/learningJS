@@ -18,6 +18,9 @@ function loadEventListeners() {
     // when the clear cart
     clearCartBtn.addEventListener('click', clearCart);
 
+    // document ready
+    document.addEventListener('DOMContentLoaded', getFromLocalStorage);
+
 }
 
 
@@ -103,4 +106,24 @@ function clearCart() {
     while (shoppingCartContent.firstChild){
         shoppingCartContent.removeChild(shoppingCartContent.firstChild);
     }
+}
+function getFromLocalStorage() {
+    let coursesLS = getCoursesFromStorage();
+
+    // Loop
+    coursesLS.forEach(function (course) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <tr>
+            <td>
+                <img src="${course.imag}" alt="1">
+            </td>
+            <td>${course.title}</td>
+            <td>${course.price}</td>
+            <td>
+                <a href="#" class="remove" data-id="${course.id}">X</a>
+            </td>            
+    `;
+        shoppingCartContent.appendChild(row);
+    })
 }
