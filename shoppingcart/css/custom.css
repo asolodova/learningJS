@@ -31,7 +31,7 @@ ul {
     list-style: none;
 }
 #hero {
-    background-image:url(shoppingCart/img/hero.jpg);
+    background-image:url(../../shoppingcart/img/hero.jpg);
     height: 350px;
     background-size: cover;
 }
@@ -78,7 +78,7 @@ ul {
     display: block;
     text-indent: -9999px;
     width: 50px;
-    background-image: url(shoppingCart/img/mglass.png);
+    background-image: url(../../shoppingcart/img/mglass.png);
     background-position: right center;
     background-repeat: no-repeat;
     border:none;
@@ -115,13 +115,13 @@ ul {
 
 
 .icon1 {
-    background-image: url(shoppingCart/img/icon1.png);
+    background-image: url(../../shoppingcart/img/icon1.png);
 }
 .icon2 {
-    background-image: url(shoppingCart/img/icon2.png);
+    background-image: url(../../shoppingcart/img/icon2.png);
 }
 .icon3 {
-    background-image: url(shoppingCart/img/icon3.png);
+    background-image: url(../../shoppingcart/img/icon3.png);
 }
 
 #courses-list .row {
